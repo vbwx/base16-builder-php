@@ -18,5 +18,8 @@ Updates all scheme and template repositories as defined in `schemes.yaml` and `t
     php Builder.php
 Build all templates using all schemes
 
+    php Builder.php -p path/to/profile.terminal
+Same as above, but uses a Terminal.app profile as template.
+
 ## Why PHP?
 It's easy to read PHP and this Base16 Builder is not meant to be the defacto CLI builder app but serves as a simple working reference application from which others can build Base16 Builders in languages better suited to their needs.
