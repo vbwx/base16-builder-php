@@ -77,6 +77,17 @@ switch (@$argv[1]) {
 		if (@$argv[1] === '-p') {
 			if (empty($argv[2])) {
 				printerr("PLIST file argument is missing", 1);
+				exit(1);
+			}
+			try {
+				// PHP can't parse XML when it contains escape characters
+				$temp = tempnam(sys_get_temp_dir(), "term");
+				file_put_contents($temp, str_replace("\033", "\\033", file_get_contents($argv[2])));
+				$term_plist = new CFPropertyList($temp);
+			}
+			catch (CFPropertyList\IOException $ex) {
+				fwrite(STDERR, "Builder.php: Cannot read PLIST file " . $argv[2]);
+				exit(66);
 			}
 			if ($no_plutil) {
 				printerr("Option -p doesn't work without plutil!");
@@ -139,6 +150,7 @@ switch (@$argv[1]) {
 				}
 
 				$file_path = "templates/$tpl_name/" . $tpl_conf['output'];
+				$temp = tempnam(sys_get_temp_dir(), "color");
 
 				// Remove all previous output
 				array_map('unlink', glob(
@@ -155,12 +167,11 @@ switch (@$argv[1]) {
 						$tpl_data = $builder->buildTemplateData($sch_data);
 
 						$file_name = (@$tpl_conf['noPrefix'] ? '' : 'base16-')
-							. (@$tpl_conf['niceFilename'] ? ucwords(strtr($tpl_data['scheme-slug'], '-', ' ')) : $tpl_data['scheme-slug'])
+							. (@$tpl_conf['niceFilename'] ?
+								ucwords(strtr($tpl_data['scheme-slug'], '-', ' ')) : $tpl_data['scheme-slug'])
 							. $tpl_conf['extension'];
 
-						$render = $builder->renderTemplate(
-							"templates/$tpl_name/templates/$tpl_file.mustache",
-							 $tpl_data);
+						$render = $builder->renderTemplate("templates/$tpl_name/templates/$tpl_file.mustache", $tpl_data);
 
 						if ($term_plist && $color_plist) {
 							try {
@@ -177,9 +188,9 @@ switch (@$argv[1]) {
 											// This is what should work:
 											// $prop->setValue($color_plist->toBinary());
 											// Here is what we have to do instead, else the color is an invalid plist
-											$color_plist->saveXML("color.plist");
-											exec('plutil -convert binary1 color.plist');
-											$prop->setValue(file_get_contents("color.plist"));
+											$color_plist->saveXML($temp);
+											exec('plutil -convert binary1 ' . escapeshellarg($temp));
+											$prop->setValue(file_get_contents($temp));
 										}
 										else {
 											$prop->setValue($val);
@@ -191,18 +202,17 @@ switch (@$argv[1]) {
 											// This is what should work:
 											// $term_plist->get(0)->add($key, new CFData($color_plist->toBinary()));
 											// Here is what we have to do instead, else the color is an invalid plist
-											$color_plist->saveXML("color.plist");
-											exec('plutil -convert binary1 color.plist');
-											$term_plist->get(0)->add($key, new CFData(file_get_contents("color.plist")));
+											$color_plist->saveXML($temp);
+											exec('plutil -convert binary1 ' . escapeshellarg($temp));
+											$term_plist->get(0)->add($key, new CFData(file_get_contents($temp)));
 										}
 										else {
 											$term_plist->get(0)->add($key, $detector->toCFType($val));
 										}
 									}
 								}
-								// Clean up plist file that shouldn't be necessary in the first place
-								@unlink("color.plist");
-								$render = $term_plist->toXML();
+								// Replace octal codes with escape characters
+								$render = str_replace("\\033", "\033", $term_plist->toXML());
 							}
 							catch (Exception $ex) {
 								printerr("PLIST file is not a valid Terminal profile", 1);
