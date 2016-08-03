@@ -73,28 +73,22 @@ switch (@$argv[1]) {
 		$color_plist = null;
 		$detector = new CFTypeDetector();
 		exec('plutil -help', $out, $no_plutil);
+		unset($out);
 
 		if (@$argv[1] === '-p') {
 			if (empty($argv[2])) {
 				printerr("PLIST file argument is missing", 1);
 				exit(1);
 			}
-			try {
-				// PHP can't parse XML when it contains escape characters
-				$temp = tempnam(sys_get_temp_dir(), "term");
-				file_put_contents($temp, str_replace("\033", "\\033", file_get_contents($argv[2])));
-				$term_plist = new CFPropertyList($temp);
-			}
-			catch (CFPropertyList\IOException $ex) {
-				fwrite(STDERR, "Builder.php: Cannot read PLIST file " . $argv[2]);
-				exit(66);
-			}
 			if ($no_plutil) {
 				printerr("Option -p doesn't work without plutil!");
 			}
 			else {
 				try {
-					$term_plist = new CFPropertyList($argv[2]);
+					// PHP can't parse XML when it contains escape characters
+					$temp = tempnam(sys_get_temp_dir(), "term");
+					file_put_contents($temp, str_replace("\033", "\\033", file_get_contents($argv[2])));
+					$term_plist = new CFPropertyList($temp);
 				}
 				catch (CFPropertyList\IOException $ex) {
 					printerr("Cannot read PLIST file " . $argv[2], 66);
