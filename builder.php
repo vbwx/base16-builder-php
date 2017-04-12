@@ -1,7 +1,5 @@
 <?php
 
-use Base16\Builder;
-
 /**
  * Base16 Builder CLI (Command Line Interface)
  */
