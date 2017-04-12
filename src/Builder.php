@@ -15,29 +15,28 @@ use Cocur\Slugify\Slugify;
 
 class Builder
 {
-	private $color;
 	private $slugify;
-
-	/**
-	 * Constructor
-	 */
-	function __construct()
-	{
-		$this->slugify = new Slugify();
-	}
 
 	/**
 	 * Parses a YAML file
 	 */
-	function parse($path)
+	static public function parse($path)
 	{
 		return Yaml::parse( file_get_contents($path) );
 	}
 
 	/**
+	 * Constructor
+	 */
+	public function __construct()
+	{
+		$this->slugify = new Slugify();
+	}
+
+	/**
 	 * Uses git to fetch template or scheme sources
 	 */
-	function fetchSources($url_list, $path)
+	public function fetchSources($url_list, $path)
 	{
 		foreach ($url_list as $name => $url) {
 			if (!file_exists("$path/$name")) {
@@ -49,22 +48,23 @@ class Builder
 	/**
 	 * Uses git to update template or scheme sources
 	 */
-	function updateSources($url_list, $path)
+	public function updateSources($url_list, $path)
 	{
 		foreach ($url_list as $name => $url) {
 			echo "\n-- $path/$name\n";
 
 			if (file_exists("$path/$name")) {
 				echo exec("git -C $path/$name pull\n") . "\n";
+			} else {
+				$this->fetchSources($url_list, $path);
 			}
-			else $this->fetchSources($url_list, $path);
 		}
 	}
 
 	/**
 	 * Renders a template using Mustache
 	 */
-	function renderTemplate($path, $template_data)
+	public function renderTemplate($path, $template_data)
 	{
 		$mustache = new \Mustache_Engine();
 		$tpl = $mustache->loadTemplate($this->readFile($path));
@@ -74,7 +74,7 @@ class Builder
 	/**
 	 * Uses git to fetch template or scheme sources
 	 */
-	function buildTemplateData($scheme_data)
+	public function buildTemplateData($scheme_data)
 	{
 		$vars['scheme-name'] = $scheme_data["scheme"];
 		$vars['scheme-author'] = $scheme_data["author"];
@@ -108,7 +108,7 @@ class Builder
 	/**
 	 * Reads a file
 	 */
-	function readFile($path)
+	public function readFile($path)
 	{
 		return file_get_contents($path);
 	}
@@ -116,7 +116,7 @@ class Builder
 	/**
 	 * Writes a file
 	 */
-	function writeFile($file_path, $file_name, $contents)
+	public function writeFile($file_path, $file_name, $contents)
 	{
 		if (!is_dir($file_path)) mkdir($file_path);
 		file_put_contents($file_path . '/' . $file_name, $contents);
@@ -125,7 +125,7 @@ class Builder
 	/**
 	 * Slugify a string
 	 */
-	function slugify($string)
+	public function slugify($string)
 	{
 		return $this->slugify->slugify($string);
 	}

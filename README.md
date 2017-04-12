@@ -12,10 +12,10 @@ Requires PHP 5.3 or greater.
 
 ## Usage
 
-    php Builder.php update
+    php builder.php update
 Updates all scheme and template repositories as defined in `schemes.yaml` and `templates.yaml`.
 
-    php Builder.php
+    php builder.php
 Build all templates using all schemes
 
     php Builder.php -p path/to/profile.terminal

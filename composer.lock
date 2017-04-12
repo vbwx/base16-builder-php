@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "86179d91eab2a50c6f2993c1d96a9298",
-    "content-hash": "bcc05f73c8844359584f07a60059641c",
+    "hash": "dd7a1133a91f58b25122d70d3fc32a01",
+    "content-hash": "99918f6108a5097bb0e8f2216f8b4b0c",
     "packages": [
         {
             "name": "cocur/slugify",
-            "version": "v1.3",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cocur/slugify.git",
-                "reference": "6bf38846ecb34d24288cdea7195122b6452c1882"
+                "reference": "16cdd7e792657d524cde931ea666436623b23301"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cocur/slugify/zipball/6bf38846ecb34d24288cdea7195122b6452c1882",
-                "reference": "6bf38846ecb34d24288cdea7195122b6452c1882",
+                "url": "https://api.github.com/repos/cocur/slugify/zipball/16cdd7e792657d524cde931ea666436623b23301",
+                "reference": "16cdd7e792657d524cde931ea666436623b23301",
                 "shasum": ""
             },
             "require": {
@@ -68,7 +68,7 @@
                 "slug",
                 "slugify"
             ],
-            "time": "2015-09-02 20:14:32"
+            "time": "2016-02-11 09:53:46"
         },
         {
             "name": "mexitek/phpcolors",
@@ -117,24 +117,24 @@
         },
         {
             "name": "mustache/mustache",
-            "version": "v2.9.0",
+            "version": "v2.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/mustache.php.git",
-                "reference": "c745b01956caf27d26b55a72a90aff56bc169cd6"
+                "reference": "a3f6d55996dd28b58f3a909d474189a3c1aa693f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/mustache.php/zipball/c745b01956caf27d26b55a72a90aff56bc169cd6",
-                "reference": "c745b01956caf27d26b55a72a90aff56bc169cd6",
+                "url": "https://api.github.com/repos/bobthecow/mustache.php/zipball/a3f6d55996dd28b58f3a909d474189a3c1aa693f",
+                "reference": "a3f6d55996dd28b58f3a909d474189a3c1aa693f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "~1.6",
-                "phpunit/phpunit": "~3.7|~4.0"
+                "friendsofphp/php-cs-fixer": "~1.11",
+                "phpunit/phpunit": "~3.7|~4.0|~5.0"
             },
             "type": "library",
             "autoload": {
@@ -159,7 +159,7 @@
                 "mustache",
                 "templating"
             ],
-            "time": "2015-08-15 19:23:13"
+            "time": "2016-07-31 06:18:27"
         },
         {
             "name": "rodneyrehm/plist",
@@ -207,34 +207,34 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.7.5",
+            "version": "v2.8.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "31cb2ad0155c95b88ee55fe12bc7ff92232c1770"
+                "reference": "0ceab136f43ed9d3e97b3eea32a7855dc50c121d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/31cb2ad0155c95b88ee55fe12bc7ff92232c1770",
-                "reference": "31cb2ad0155c95b88ee55fe12bc7ff92232c1770",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/0ceab136f43ed9d3e97b3eea32a7855dc50c121d",
+                "reference": "0ceab136f43ed9d3e97b3eea32a7855dc50c121d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.9"
             },
-            "require-dev": {
-                "symfony/phpunit-bridge": "~2.7"
-            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Yaml\\": ""
-                }
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -252,7 +252,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-09-14 14:14:09"
+            "time": "2016-07-17 09:06:15"
         }
     ],
     "packages-dev": [],
