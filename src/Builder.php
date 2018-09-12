@@ -78,7 +78,7 @@ class Builder
 	{
 		$vars['scheme-name'] = $scheme_data["scheme"];
 		$vars['scheme-author'] = $scheme_data["author"];
-    	$vars['scheme-slug'] = $this->slugify($scheme_data["scheme"]);
+		$vars['scheme-slug'] = $this->slugify($scheme_data["scheme"]);
 
 		$bases = array('00', '01', '02', '03', '04', '05', '06', '07', '08',
 			'09', '0A', '0B', '0C', '0D', '0E', '0F');
@@ -94,7 +94,7 @@ class Builder
 			$vars[$base_key . '-rgb-r'] = $color->getRgb()['R'];
 			$vars[$base_key . '-rgb-g'] = $color->getRgb()['G'];
 			$vars[$base_key . '-rgb-b'] = $color->getRgb()['B'];
-            $vars[$base_key . '-srgb-r'] = str_replace(".0000000000", "", number_format($color->getRgb()['R'] / 255, 10));
+			$vars[$base_key . '-srgb-r'] = str_replace(".0000000000", "", number_format($color->getRgb()['R'] / 255, 10));
 			$vars[$base_key . '-srgb-g'] = str_replace(".0000000000", "", number_format($color->getRgb()['G'] / 255, 10));
 			$vars[$base_key . '-srgb-b'] = str_replace(".0000000000", "", number_format($color->getRgb()['B'] / 255, 10));
 			$vars[$base_key . '-hsl-h'] = $color->getHsl()['H'];
