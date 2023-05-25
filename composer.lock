@@ -1,11 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "dd7a1133a91f58b25122d70d3fc32a01",
-    "content-hash": "99918f6108a5097bb0e8f2216f8b4b0c",
+    "content-hash": "bcc05f73c8844359584f07a60059641c",
     "packages": [
         {
             "name": "cocur/slugify",
@@ -68,7 +67,11 @@
                 "slug",
                 "slugify"
             ],
-            "time": "2016-02-11 09:53:46"
+            "support": {
+                "issues": "https://github.com/cocur/slugify/issues",
+                "source": "https://github.com/cocur/slugify/tree/1.4"
+            },
+            "time": "2016-02-11T09:53:46+00:00"
         },
         {
             "name": "mexitek/phpcolors",
@@ -113,20 +116,24 @@
                 "frontend",
                 "ui"
             ],
-            "time": "2015-09-09 15:43:06"
+            "support": {
+                "issues": "https://github.com/mexitek/phpColors/issues",
+                "source": "https://github.com/mexitek/phpColors/tree/master"
+            },
+            "time": "2015-09-09T15:43:06+00:00"
         },
         {
             "name": "mustache/mustache",
-            "version": "v2.11.1",
+            "version": "v2.14.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/mustache.php.git",
-                "reference": "a3f6d55996dd28b58f3a909d474189a3c1aa693f"
+                "reference": "e62b7c3849d22ec55f3ec425507bf7968193a6cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/mustache.php/zipball/a3f6d55996dd28b58f3a909d474189a3c1aa693f",
-                "reference": "a3f6d55996dd28b58f3a909d474189a3c1aa693f",
+                "url": "https://api.github.com/repos/bobthecow/mustache.php/zipball/e62b7c3849d22ec55f3ec425507bf7968193a6cb",
+                "reference": "e62b7c3849d22ec55f3ec425507bf7968193a6cb",
                 "shasum": ""
             },
             "require": {
@@ -159,29 +166,39 @@
                 "mustache",
                 "templating"
             ],
-            "time": "2016-07-31 06:18:27"
+            "support": {
+                "issues": "https://github.com/bobthecow/mustache.php/issues",
+                "source": "https://github.com/bobthecow/mustache.php/tree/v2.14.2"
+            },
+            "time": "2022-08-23T13:07:01+00:00"
         },
         {
             "name": "rodneyrehm/plist",
-            "version": "v2.0.1",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/rodneyrehm/CFPropertyList.git",
-                "reference": "2ea0483806c989eb0518a767fa29a111bb29cb67"
+                "url": "https://github.com/TECLIB/CFPropertyList.git",
+                "reference": "eb1f97cc44427359be9f09e617d68eef57707617"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rodneyrehm/CFPropertyList/zipball/2ea0483806c989eb0518a767fa29a111bb29cb67",
-                "reference": "2ea0483806c989eb0518a767fa29a111bb29cb67",
+                "url": "https://api.github.com/repos/TECLIB/CFPropertyList/zipball/eb1f97cc44427359be9f09e617d68eef57707617",
+                "reference": "eb1f97cc44427359be9f09e617d68eef57707617",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3"
+                "ext-dom": "*",
+                "ext-libxml": "*",
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0",
+                "squizlabs/php_codesniffer": "^3.2"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "CFPropertyList": "classes/"
+                "psr-4": {
+                    "CFPropertyList\\": "src/CFPropertyList/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -191,36 +208,138 @@
             "authors": [
                 {
                     "name": "Christian Kruse",
-                    "email": "cjk@wwwtech.de"
+                    "email": "cjk@wwwtech.de",
+                    "role": "developer"
                 },
                 {
                     "name": "Rodney Rehm",
-                    "email": "mail+github@rodneyrehm.de"
+                    "email": "mail+github@rodneyrehm.de",
+                    "role": "developer"
+                },
+                {
+                    "name": "Thierry Bugier",
+                    "email": "tbugier@teclib.com",
+                    "role": "developer"
                 }
             ],
             "description": "Library for reading and writing Apple's CFPropertyList (plist) files in XML as well as binary format.",
-            "homepage": "https://github.com/rodneyrehm/CFPropertyList",
+            "homepage": "https://github.com/TECLIB/CFPropertyList",
             "keywords": [
-                "plist"
+                "CFPropertyList",
+                "Core Foundation",
+                "apple",
+                "binary",
+                "plist",
+                "xml"
             ],
-            "time": "2015-01-28 23:18:19"
+            "support": {
+                "docs": "http://teclib.github.io/CFPropertyList/howtos/",
+                "email": "contact@teclib.com",
+                "issues": "https://github.com/TECLIB/CFPropertyList/issues",
+                "rss": "https://teclib.github.io/CFPropertyList/feed.xml",
+                "source": "https://github.com/TECLIB/CFPropertyList"
+            },
+            "time": "2021-12-01T18:24:28+00:00"
         },
         {
-            "name": "symfony/yaml",
-            "version": "v2.8.9",
+            "name": "symfony/polyfill-ctype",
+            "version": "v1.27.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/yaml.git",
-                "reference": "0ceab136f43ed9d3e97b3eea32a7855dc50c121d"
+                "url": "https://github.com/symfony/polyfill-ctype.git",
+                "reference": "5bbc823adecdae860bb64756d639ecfec17b050a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/0ceab136f43ed9d3e97b3eea32a7855dc50c121d",
-                "reference": "0ceab136f43ed9d3e97b3eea32a7855dc50c121d",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/5bbc823adecdae860bb64756d639ecfec17b050a",
+                "reference": "5bbc823adecdae860bb64756d639ecfec17b050a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9"
+                "php": ">=7.1"
+            },
+            "provide": {
+                "ext-ctype": "*"
+            },
+            "suggest": {
+                "ext-ctype": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.27-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gert de Pagter",
+                    "email": "BackEndTea@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for ctype functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "ctype",
+                "polyfill",
+                "portable"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.27.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-11-03T14:55:06+00:00"
+        },
+        {
+            "name": "symfony/yaml",
+            "version": "v2.8.52",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "02c1859112aa779d9ab394ae4f3381911d84052b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/02c1859112aa779d9ab394ae4f3381911d84052b",
+                "reference": "02c1859112aa779d9ab394ae4f3381911d84052b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "symfony/polyfill-ctype": "~1.8"
             },
             "type": "library",
             "extra": {
@@ -252,7 +371,10 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-17 09:06:15"
+            "support": {
+                "source": "https://github.com/symfony/yaml/tree/v2.8.52"
+            },
+            "time": "2018-11-11T11:18:13+00:00"
         }
     ],
     "packages-dev": [],
@@ -262,5 +384,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
