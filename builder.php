@@ -204,7 +204,7 @@ switch (@$argv[1]) {
 											$color_plist->get(0)->get('$objects')->get(1)->get('NSRGB')->setValue($val);
 											// This is what should work:
 											// $prop->setValue($color_plist->toBinary());
-											// Here is what we have to do instead, else the color is an invalid plist
+											// Here is what we have to do instead, otherwise the color is an invalid plist
 											$color_plist->saveXML($temp);
 											exec('plutil -convert binary1 ' . escapeshellarg($temp));
 											$prop->setValue(file_get_contents($temp));
@@ -218,7 +218,7 @@ switch (@$argv[1]) {
 											$color_plist->get(0)->get('$objects')->get(1)->get('NSRGB')->setValue($val);
 											// This is what should work:
 											// $term_plist->get(0)->add($key, new CFData($color_plist->toBinary()));
-											// Here is what we have to do instead, else the color is an invalid plist
+											// Here is what we have to do instead, otherwise the color is an invalid plist
 											$color_plist->saveXML($temp);
 											exec('plutil -convert binary1 ' . escapeshellarg($temp));
 											$term_plist->get(0)->add($key, new CFData(file_get_contents($temp)));

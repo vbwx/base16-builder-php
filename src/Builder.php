@@ -85,18 +85,23 @@ class Builder
 
 		foreach ($bases as $base) {
 			$base_key = 'base' . $base;
-			$color = new Color($scheme_data[$base_key]);
+			$color = new Color(str_replace('#', '', $scheme_data[$base_key]));
 
 			$vars[$base_key . '-hex'] = $color->getHex();
+			$vars[$base_key . '-hex-bgr'] = substr($color->getHex(), 4, 2) .
+				substr($color->getHex(), 2, 2) . substr($color->getHex(), 0, 2);
 			$vars[$base_key . '-hex-r'] = substr($color->getHex(), 0, 2);
 			$vars[$base_key . '-hex-g'] = substr($color->getHex(), 2, 2);
 			$vars[$base_key . '-hex-b'] = substr($color->getHex(), 4, 2);
 			$vars[$base_key . '-rgb-r'] = $color->getRgb()['R'];
 			$vars[$base_key . '-rgb-g'] = $color->getRgb()['G'];
 			$vars[$base_key . '-rgb-b'] = $color->getRgb()['B'];
-			$vars[$base_key . '-srgb-r'] = str_replace(".0000000000", "", number_format($color->getRgb()['R'] / 255, 10));
-			$vars[$base_key . '-srgb-g'] = str_replace(".0000000000", "", number_format($color->getRgb()['G'] / 255, 10));
-			$vars[$base_key . '-srgb-b'] = str_replace(".0000000000", "", number_format($color->getRgb()['B'] / 255, 10));
+			$vars[$base_key . '-dec-r'] = str_replace(".0000000000", "",
+				number_format($color->getRgb()['R'] / 255, 10));
+			$vars[$base_key . '-dec-g'] = str_replace(".0000000000", "",
+				number_format($color->getRgb()['G'] / 255, 10));
+			$vars[$base_key . '-dec-b'] = str_replace(".0000000000", "",
+				number_format($color->getRgb()['B'] / 255, 10));
 			$vars[$base_key . '-hsl-h'] = $color->getHsl()['H'];
 			$vars[$base_key . '-hsl-s'] = $color->getHsl()['S'];
 			$vars[$base_key . '-hsl-l'] = $color->getHsl()['L'];
