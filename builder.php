@@ -14,6 +14,8 @@ if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
 	exit(1);
 }
 
+error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED));
+
 use Base16\Builder;
 use CFPropertyList\CFTypeDetector;
 use CFPropertyList\CFPropertyList;
