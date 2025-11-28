@@ -82,10 +82,10 @@ switch (@$argv[1]) {
 	*/
 	default:
 		if (count($sch_list) == 0) {
-			echo "Warning: Could not parse schemes or missing $schemes_list, did you do `php ${argv[0]} update`?\n";
+			echo "Warning: Could not parse schemes or missing $schemes_list, did you do `php {$argv[0]} update`?\n";
 		}
 		if (count($tpl_list) == 0) {
-			echo "Warning: Could not parse templates or missing $templates_list, did you do `php ${argv[0]} update`?\n";
+			echo "Warning: Could not parse templates or missing $templates_list, did you do `php {$argv[0]} update`?\n";
 		}
 
 
