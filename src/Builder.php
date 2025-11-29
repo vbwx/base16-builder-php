@@ -74,7 +74,7 @@ class Builder
 	/**
 	 * Uses git to fetch template or scheme sources
 	 */
-	public function buildTemplateData($scheme_data)
+	public function buildTemplateData($scheme_data, $vars)
 	{
 		$vars['scheme-name'] = $scheme_data["scheme"];
 		$vars['scheme-author'] = $scheme_data["author"];

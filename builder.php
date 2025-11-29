@@ -181,7 +181,7 @@ switch (@$argv[1]) {
 					foreach (glob("schemes/$sch_name/*.yaml") as $sch_file) {
 
 						$sch_data = Builder::parse($sch_file);
-						$tpl_data = $builder->buildTemplateData($sch_data);
+						$tpl_data = $builder->buildTemplateData($sch_data, $tpl_conf);
 
 						$file_name = (@$tpl_conf['noPrefix'] ? '' : 'base16-')
 							. (@$tpl_conf['niceFilename'] ?
