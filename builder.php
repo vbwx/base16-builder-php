@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Base16 Builder CLI (Command Line Interface)
  */
@@ -55,15 +54,23 @@ switch (@$argv[1]) {
 	/**
 	* Displays a help message
 	*/
-	case '-h':
-		echo "Base16 Builder PHP CLI\n";
-		echo "https://github.com/chriskempson/base16-builder-php\n";
+	case '-help':
+	case '--help':
+		echo <<<'END'
+		Base16 Builder PHP CLI
+		https://github.com/chriskempson/base16-builder-php (forked by vbwx)
+
+		Usage: php builder.php -update
+		       php builder.php [-p PLIST_FILE] [TEMPLATE ...]
+
+		END;
 		break;
 
 	/**
 	* Updates template and scheme sources
 	*/
-	case 'update':
+	case '-update':
+	case '--update':
 		$builder->updateSources($src_list, 'sources');
 
 		// Parse source lists incase the sources have just been fetched
@@ -90,9 +97,9 @@ switch (@$argv[1]) {
 			echo "Warning: Could not parse templates or missing $templates_list, did you do `php {$argv[0]} update`?\n";
 		}
 
-
 		$term_plist = null;
 		$color_plist = null;
+		$custom_plist = false;
 		$detector = new CFTypeDetector();
 		exec('plutil -help', $out, $no_plutil);
 		unset($out);
@@ -111,6 +118,7 @@ switch (@$argv[1]) {
 					$temp = tempnam(sys_get_temp_dir(), "term");
 					file_put_contents($temp, str_replace("\033", "\\033", file_get_contents($argv[2])));
 					$term_plist = new CFPropertyList($temp);
+					$custom_plist = true;
 				}
 				catch (CFPropertyList\IOException $ex) {
 					printerr("Cannot read PLIST file " . $argv[2], 66);
@@ -122,9 +130,14 @@ switch (@$argv[1]) {
 					printerr("PLIST file " . $argv[2] . " is empty", 66);
 				}
 			}
+			array_shift($argv); array_shift($argv);
 		}
+		array_shift($argv);
 
 		// Loop templates repositories
+		if ($argv) {
+			$tpl_list = array_intersect_key($tpl_list, array_flip($argv));
+		}
 		foreach ($tpl_list as $tpl_name => $tpl_url) {
 
 			$tpl_confs = Builder::parse(
@@ -133,36 +146,36 @@ switch (@$argv[1]) {
 			// Loop template files
 			foreach ($tpl_confs as $tpl_file => $tpl_conf) {
 
-				if (@$tpl_conf['colorTemplate'] && @$tpl_conf['plistTemplate']) {
+				if (@$tpl_conf['color-template'] && @$tpl_conf['plist-template']) {
 					if ($no_plutil) {
 						echo "Skipping $tpl_name/$tpl_file because plutil is not installed\n";
 						continue;
 					}
-					if (@$argv[1] !== '-p') {
+					if (!$custom_plist) {
 						try {
-							$term_plist = new CFPropertyList("templates/$tpl_name/templates/" . $tpl_conf['plistTemplate']);
+							$term_plist = new CFPropertyList("templates/$tpl_name/templates/" . $tpl_conf['plist-template']);
 						}
 						catch (CFPropertyList\IOException $ex) {
-							printerr("Cannot read PLIST file" . $tpl_conf['plistTemplate'], 66);
+							printerr("Cannot read PLIST file" . $tpl_conf['plist-template'], 66);
 						}
 						catch (Exception $ex) {
-							printerr("Cannot parse PLIST file" . $tpl_conf['plistTemplate'], 66);
+							printerr("Cannot parse PLIST file" . $tpl_conf['plist-template'], 66);
 						}
 						if (!$term_plist) {
-							printerr("PLIST file" . $tpl_conf['plistTemplate'] . " is empty", 66);
+							printerr("PLIST file" . $tpl_conf['plist-template'] . " is empty", 66);
 						}
 					}
 					try {
-						$color_plist = new CFPropertyList("templates/$tpl_name/templates/" . $tpl_conf['colorTemplate']);
+						$color_plist = new CFPropertyList("templates/$tpl_name/templates/" . $tpl_conf['color-template']);
 					}
 					catch (CFPropertyList\IOException $ex) {
-						printerr("Cannot read PLIST file" . $tpl_conf['colorTemplate'], 66);
+						printerr("Cannot read PLIST file" . $tpl_conf['color-template'], 66);
 					}
 					catch (Exception $ex) {
-						printerr("Cannot parse PLIST file" . $tpl_conf['colorTemplate'], 66);
+						printerr("Cannot parse PLIST file" . $tpl_conf['color-template'], 66);
 					}
 					if (!$color_plist) {
-						printerr("PLIST file" . $tpl_conf['colorTemplate'] . " is empty", 66);
+						printerr("PLIST file" . $tpl_conf['color-template'] . " is empty", 66);
 					}
 				}
 
@@ -171,7 +184,7 @@ switch (@$argv[1]) {
 
 				// Remove all previous output
 				array_map('unlink', glob(
-					"$file_path/" . (@$tpl_conf['noPrefix'] ? '' : 'base16-') . '*' . $tpl_conf['extension']
+					"$file_path/" . (@$tpl_conf['no-prefix'] ? '' : 'base16-') . '*' . $tpl_conf['extension']
 				));
 
 				// Loop scheme repositories
@@ -183,8 +196,8 @@ switch (@$argv[1]) {
 						$sch_data = Builder::parse($sch_file);
 						$tpl_data = $builder->buildTemplateData($sch_data, $tpl_conf);
 
-						$file_name = (@$tpl_conf['noPrefix'] ? '' : 'base16-')
-							. (@$tpl_conf['niceFilename'] ?
+						$file_name = (@$tpl_conf['no-prefix'] ? '' : 'base16-')
+							. (@$tpl_conf['nice-filename'] ?
 								ucwords(strtr($tpl_data['scheme-slug'], '-', ' ')) : $tpl_data['scheme-slug'])
 							. $tpl_conf['extension'];
 
@@ -240,7 +253,7 @@ switch (@$argv[1]) {
 						echo "Built " . $tpl_conf['output'] . "/$file_name\n";
 					}
 				}
-				if (@$argv[1] !== '-p') {
+				if (!$custom_plist) {
 					$term_plist = null;
 				}
 				$color_plist = null;
