@@ -196,7 +196,7 @@ switch (@$argv[1]) {
 						$sch_data = Builder::parse($sch_file);
 						$tpl_data = $builder->buildTemplateData($sch_data, $tpl_conf);
 
-						$file_name = (@$tpl_conf['no-prefix'] ? '' : 'base16-')
+						$file_name = (@$tpl_conf['no-prefix'] ? '' : (@$tpl_conf['nice-filename'] ? 'Base16 ' : 'base16-'))
 							. (@$tpl_conf['nice-filename'] ?
 								ucwords(strtr($tpl_data['scheme-slug'], '-', ' ')) : $tpl_data['scheme-slug'])
 							. $tpl_conf['extension'];
