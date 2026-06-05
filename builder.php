@@ -197,8 +197,7 @@ switch (@$argv[1]) {
 						$tpl_data = $builder->buildTemplateData($sch_data, $tpl_conf);
 
 						$file_name = (@$tpl_conf['no-prefix'] ? '' : (@$tpl_conf['nice-filename'] ? 'Base16 ' : 'base16-'))
-							. (@$tpl_conf['nice-filename'] ?
-								ucwords(strtr($tpl_data['scheme-slug'], '-', ' ')) : $tpl_data['scheme-slug'])
+							. (@$tpl_conf['nice-filename'] ? $tpl_data['scheme-name'] : $tpl_data['scheme-slug'])
 							. $tpl_conf['extension'];
 
 						$render = $builder->renderTemplate("templates/$tpl_name/templates/$tpl_file.mustache", $tpl_data);
