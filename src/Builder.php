@@ -80,6 +80,15 @@ class Builder
 		$vars['scheme-author'] = $scheme_data["author"];
 		$vars['scheme-slug'] = $this->slugify($scheme_data["scheme"]);
 
+		if (str_contains($vars['scheme-slug'], '-light')) {
+			$vars['scheme-variant'] = 'light';
+		} elseif (str_contains($vars['scheme-slug'], '-dark')) {
+			$vars['scheme-variant'] = 'dark';
+		} else {
+			$color = new Color(str_replace('#', '', $scheme_data['base00']));
+			$vars['scheme-variant'] = ($color->isDark() ? 'dark' : 'light');
+		}
+
 		$bases = array('00', '01', '02', '03', '04', '05', '06', '07', '08',
 			'09', '0A', '0B', '0C', '0D', '0E', '0F');
 
