@@ -12,13 +12,16 @@ Requires PHP 5.3 or greater.
 
 ## Usage
 
-    php builder.php update
+    php builder.php -update
 Updates all scheme and template repositories as defined in `schemes.yaml` and `templates.yaml`.
 
     php builder.php
-Build all templates using all schemes
+Build all templates using all schemes.
 
-    php Builder.php -p path/to/profile.terminal
+    php builder.php terminal-app
+Build only the Terminal.app template using all schemes.
+
+    php builder.php -p path/to/profile.terminal terminal-app
 Same as above, but uses a Terminal.app profile as template.
 
 ## Why PHP?
