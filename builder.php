@@ -140,8 +140,8 @@ switch (@$argv[1]) {
 		}
 		foreach ($tpl_list as $tpl_name => $tpl_url) {
 
-			$tpl_confs = Builder::parse(
-				"templates/$tpl_name/templates/config.yaml");
+			echo "\n-- $tpl_name\n";
+			$tpl_confs = Builder::parse("templates/$tpl_name/templates/config.yaml");
 
 			// Loop template files
 			foreach ($tpl_confs as $tpl_file => $tpl_conf) {
