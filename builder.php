@@ -184,7 +184,7 @@ switch (@$argv[1]) {
 
 				// Remove all previous output
 				array_map('unlink', glob(
-					"$file_path/" . (@$tpl_conf['no-prefix'] ? '' : 'base16-') . '*' . $tpl_conf['extension']
+					"$file_path/" . (@$tpl_conf['no-prefix'] ? '' : (@$tpl_conf['nice-filename'] ? 'Base16 ' : 'base16-')) . '*' . $tpl_conf['extension']
 				));
 
 				// Loop scheme repositories
