@@ -78,6 +78,7 @@ class Builder
 	{
 		$vars['scheme-name'] = $scheme_data["scheme"];
 		$vars['scheme-author'] = $scheme_data["author"];
+		$vars['scheme-url'] = $scheme_data["url"];
 		$vars['scheme-slug'] = $this->slugify($scheme_data["scheme"]);
 
 		if (str_contains($vars['scheme-slug'], '-light')) {
