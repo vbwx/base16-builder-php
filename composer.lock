@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bcc05f73c8844359584f07a60059641c",
+    "content-hash": "58eca209292be2c8d14d81bdfc53b658",
     "packages": [
         {
             "name": "cocur/slugify",
@@ -174,16 +174,16 @@
         },
         {
             "name": "rodneyrehm/plist",
-            "version": "v2.0.3",
+            "version": "v2.0.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/TECLIB/CFPropertyList.git",
-                "reference": "eb1f97cc44427359be9f09e617d68eef57707617"
+                "url": "https://github.com/moodlehq/CFPropertyList.git",
+                "reference": "e3a09679d7c020c56f13a8200d50816b3c326733"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TECLIB/CFPropertyList/zipball/eb1f97cc44427359be9f09e617d68eef57707617",
-                "reference": "eb1f97cc44427359be9f09e617d68eef57707617",
+                "url": "https://api.github.com/repos/moodlehq/CFPropertyList/zipball/e3a09679d7c020c56f13a8200d50816b3c326733",
+                "reference": "e3a09679d7c020c56f13a8200d50816b3c326733",
                 "shasum": ""
             },
             "require": {
@@ -192,7 +192,7 @@
                 "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^9.0",
+                "phpunit/phpunit": "^9.6.22",
                 "squizlabs/php_codesniffer": "^3.2"
             },
             "type": "library",
@@ -206,6 +206,16 @@
                 "MIT"
             ],
             "authors": [
+                {
+                    "name": "Andrew Lyons",
+                    "email": "andrew.lyons@moodle.com",
+                    "role": "developer"
+                },
+                {
+                    "name": "Andrew Gosali",
+                    "email": "andrew.gosali@moodle.com",
+                    "role": "developer"
+                },
                 {
                     "name": "Christian Kruse",
                     "email": "cjk@wwwtech.de",
@@ -223,7 +233,7 @@
                 }
             ],
             "description": "Library for reading and writing Apple's CFPropertyList (plist) files in XML as well as binary format.",
-            "homepage": "https://github.com/TECLIB/CFPropertyList",
+            "homepage": "https://github.com/moodlehq/CFPropertyList",
             "keywords": [
                 "CFPropertyList",
                 "Core Foundation",
@@ -233,30 +243,29 @@
                 "xml"
             ],
             "support": {
-                "docs": "http://teclib.github.io/CFPropertyList/howtos/",
-                "email": "contact@teclib.com",
-                "issues": "https://github.com/TECLIB/CFPropertyList/issues",
-                "rss": "https://teclib.github.io/CFPropertyList/feed.xml",
-                "source": "https://github.com/TECLIB/CFPropertyList"
+                "docs": "https://moodlehq.github.io/CFPropertyList/howtos/",
+                "issues": "https://github.com/moodlehq/CFPropertyList/issues",
+                "rss": "https://moodlehq.github.io/CFPropertyList/feed.xml",
+                "source": "https://github.com/moodlehq/CFPropertyList"
             },
-            "time": "2021-12-01T18:24:28+00:00"
+            "time": "2025-02-17T03:42:49+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.27.0",
+            "version": "v1.37.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "5bbc823adecdae860bb64756d639ecfec17b050a"
+                "reference": "141046a8f9477948ff284fa65be2095baafb94f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/5bbc823adecdae860bb64756d639ecfec17b050a",
-                "reference": "5bbc823adecdae860bb64756d639ecfec17b050a",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/141046a8f9477948ff284fa65be2095baafb94f2",
+                "reference": "141046a8f9477948ff284fa65be2095baafb94f2",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "provide": {
                 "ext-ctype": "*"
@@ -266,12 +275,9 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-main": "1.27-dev"
-                },
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -305,7 +311,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.27.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.37.0"
             },
             "funding": [
                 {
@@ -317,36 +323,45 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-11-03T14:55:06+00:00"
+            "time": "2026-04-10T16:19:22+00:00"
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.52",
+            "version": "v8.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "02c1859112aa779d9ab394ae4f3381911d84052b"
+                "reference": "efb42bd2c6f4f3ccfd4683583449938b5fc146b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/02c1859112aa779d9ab394ae4f3381911d84052b",
-                "reference": "02c1859112aa779d9ab394ae4f3381911d84052b",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/efb42bd2c6f4f3ccfd4683583449938b5fc146b0",
+                "reference": "efb42bd2c6f4f3ccfd4683583449938b5fc146b0",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9",
-                "symfony/polyfill-ctype": "~1.8"
+                "php": ">=8.4.1",
+                "symfony/polyfill-ctype": "^1.8"
             },
+            "conflict": {
+                "symfony/console": "<7.4"
+            },
+            "require-dev": {
+                "symfony/console": "^7.4|^8.0",
+                "yaml/yaml-test-suite": "*"
+            },
+            "bin": [
+                "Resources/bin/yaml-lint"
+            ],
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.8-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Yaml\\": ""
@@ -369,21 +384,39 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
-            "description": "Symfony Yaml Component",
+            "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v2.8.52"
+                "source": "https://github.com/symfony/yaml/tree/v8.1.0"
             },
-            "time": "2018-11-11T11:18:13+00:00"
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-05-29T05:06:50+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
 }
