@@ -16,10 +16,10 @@ Requires PHP 5.3 or greater.
 Updates all scheme and template repositories as defined in `schemes.yaml` and `templates.yaml`.
 
     php builder.php
-Build all templates using all schemes.
+Builds all templates using all schemes.
 
     php builder.php terminal-app
-Build only the Terminal.app template using all schemes.
+Builds only the Terminal.app template using all schemes.
 
     php builder.php -p path/to/profile.terminal terminal-app
 Same as above, but uses a Terminal.app profile as template.
