@@ -55,7 +55,8 @@ class Builder
 
 			if (file_exists("$path/$name")) {
 				echo exec("git -C $path/$name pull\n") . "\n";
-			} else {
+			}
+			else {
 				$this->fetchSources($url_list, $path);
 			}
 		}
@@ -83,9 +84,11 @@ class Builder
 
 		if (str_contains($vars['scheme-slug'], '-light')) {
 			$vars['scheme-variant'] = 'light';
-		} elseif (str_contains($vars['scheme-slug'], '-dark')) {
+		}
+		elseif (str_contains($vars['scheme-slug'], '-dark')) {
 			$vars['scheme-variant'] = 'dark';
-		} else {
+		}
+		else {
 			$color = new Color(str_replace('#', '', $scheme_data['base00']));
 			$vars['scheme-variant'] = ($color->isDark() ? 'dark' : 'light');
 		}
@@ -118,6 +121,31 @@ class Builder
 		}
 
 		return $vars;
+	}
+
+	/**
+	 * Converts an XML property list to a binary property list
+	 */
+	public function convertToBinary($plist)
+	{
+		$proc = proc_open('plutil -convert binary1 -o - -', [
+			0 => ['pipe', 'r'],
+			1 => ['pipe', 'w'],
+			2 => ['pipe', 'w']
+		], $pipes);
+		if (!is_resource($proc)) {
+			throw new RuntimeException("Cannot execute plutil");
+		}
+		fwrite($pipes[0], $plist->toXML());
+		fclose($pipes[0]);
+		$out = stream_get_contents($pipes[1]);
+		$err = stream_get_contents($pipes[2]);
+		fclose($pipes[1]);
+		fclose($pipes[2]);
+		if (proc_close($proc)) {
+			throw new RuntimeException("plutil: $err");
+		}
+		return $out;
 	}
 
 	/**

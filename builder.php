@@ -112,10 +112,9 @@ switch (@$argv[1]) {
 			}
 			else {
 				try {
-					// PHP can't parse XML when it contains escape characters
-					$temp = tempnam(sys_get_temp_dir(), "term");
-					file_put_contents($temp, str_replace("\033", "\\033", file_get_contents($argv[2])));
-					$term_plist = new CFPropertyList($temp);
+					// PHP can't parse XML which contains escape characters
+					$term_plist = new CFPropertyList();
+					$term_plist->parse(str_replace("\033", "\\033", file_get_contents($argv[2])), CFPropertyList::FORMAT_XML);
 					$custom_plist = true;
 				}
 				catch (CFPropertyList\IOException $ex) {
@@ -178,7 +177,6 @@ switch (@$argv[1]) {
 				}
 
 				$file_path = "templates/$tpl_name/" . $tpl_conf['output'];
-				$temp = tempnam(sys_get_temp_dir(), "color");
 
 				// Remove all previous output
 				array_map('unlink', glob(
@@ -216,9 +214,7 @@ switch (@$argv[1]) {
 											// This is what should work:
 											// $prop->setValue($color_plist->toBinary());
 											// Here is what we have to do instead, otherwise the color is an invalid plist
-											$color_plist->saveXML($temp);
-											exec('plutil -convert binary1 ' . escapeshellarg($temp));
-											$prop->setValue(file_get_contents($temp));
+											$prop->setValue($builder->convertToBinary($color_plist));
 										}
 										else {
 											$prop->setValue($val);
@@ -230,9 +226,7 @@ switch (@$argv[1]) {
 											// This is what should work:
 											// $term_plist->get(0)->add($key, new CFData($color_plist->toBinary()));
 											// Here is what we have to do instead, otherwise the color is an invalid plist
-											$color_plist->saveXML($temp);
-											exec('plutil -convert binary1 ' . escapeshellarg($temp));
-											$term_plist->get(0)->add($key, new CFData(file_get_contents($temp)));
+											$term_plist->get(0)->add($key, new CFData($builder->convertToBinary($color_plist)));
 										}
 										else {
 											$term_plist->get(0)->add($key, $detector->toCFType($val));
@@ -241,6 +235,9 @@ switch (@$argv[1]) {
 								}
 								// Replace octal codes with escape characters
 								$render = str_replace("\\033", "\033", $term_plist->toXML());
+							}
+							catch (RuntimeException $ex) {
+								printerr($ex->getMessage(), 1);
 							}
 							catch (Exception $ex) {
 								printerr("PLIST file is not a valid Terminal profile", 66);
