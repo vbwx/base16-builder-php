@@ -3,14 +3,21 @@
  * Base16 Builder CLI (Command Line Interface)
  */
 
+// Global functions
+function printerr ($message, $code = 0) {
+	fwrite(STDERR, $message . "\n");
+	if ($code) {
+		exit($code);
+	}
+}
+
 // Source paths
 $sources_list = 'sources.yaml';
 $schemes_list = 'sources/schemes/list.yaml';
 $templates_list = 'sources/templates/list.yaml';
 
 if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
-	echo "You must run 'composer install' before using base16-builder-php.\n";
-	exit(1);
+	printerr("You must run 'composer install' before using base16-builder-php.", 1);
 }
 
 error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_DEPRECATED));
@@ -24,14 +31,6 @@ use Symfony\Component\Yaml\Exception\ParseException;
 require __DIR__ . '/vendor/autoload.php';
 
 $builder = new Builder;
-
-// Global functions
-function printerr ($message, $code = 0) {
-	fwrite(STDERR, $message . "\n");
-	if ($code) {
-		exit($code);
-	}
-}
 
 // Parse sources lists
 $src_list = Builder::parse($sources_list);
@@ -91,10 +90,10 @@ switch (@$argv[1]) {
 	*/
 	default:
 		if (count($sch_list) == 0) {
-			echo "Warning: Could not parse schemes or missing $schemes_list, did you do `php {$argv[0]} update`?\n";
+			echo "Warning: Could not parse schemes or missing $schemes_list, did you run `php {$argv[0]} -update`?\n";
 		}
 		if (count($tpl_list) == 0) {
-			echo "Warning: Could not parse templates or missing $templates_list, did you do `php {$argv[0]} update`?\n";
+			echo "Warning: Could not parse templates or missing $templates_list, did you run `php {$argv[0]} -update`?\n";
 		}
 
 		$term_plist = null;
@@ -107,7 +106,6 @@ switch (@$argv[1]) {
 		if (@$argv[1] === '-p') {
 			if (empty($argv[2])) {
 				printerr("PLIST file argument is missing", 1);
-				exit(1);
 			}
 			if ($no_plutil) {
 				printerr("Option -p doesn't work without plutil!");
@@ -156,26 +154,26 @@ switch (@$argv[1]) {
 							$term_plist = new CFPropertyList("templates/$tpl_name/templates/" . $tpl_conf['plist-template']);
 						}
 						catch (CFPropertyList\IOException $ex) {
-							printerr("Cannot read PLIST file" . $tpl_conf['plist-template'], 66);
+							printerr("Cannot read PLIST file " . $tpl_conf['plist-template'], 66);
 						}
 						catch (Exception $ex) {
-							printerr("Cannot parse PLIST file" . $tpl_conf['plist-template'], 66);
+							printerr("Cannot parse PLIST file " . $tpl_conf['plist-template'], 66);
 						}
 						if (!$term_plist) {
-							printerr("PLIST file" . $tpl_conf['plist-template'] . " is empty", 66);
+							printerr("PLIST file " . $tpl_conf['plist-template'] . " is empty", 66);
 						}
 					}
 					try {
 						$color_plist = new CFPropertyList("templates/$tpl_name/templates/" . $tpl_conf['color-template']);
 					}
 					catch (CFPropertyList\IOException $ex) {
-						printerr("Cannot read PLIST file" . $tpl_conf['color-template'], 66);
+						printerr("Cannot read PLIST file " . $tpl_conf['color-template'], 66);
 					}
 					catch (Exception $ex) {
-						printerr("Cannot parse PLIST file" . $tpl_conf['color-template'], 66);
+						printerr("Cannot parse PLIST file " . $tpl_conf['color-template'], 66);
 					}
 					if (!$color_plist) {
-						printerr("PLIST file" . $tpl_conf['color-template'] . " is empty", 66);
+						printerr("PLIST file " . $tpl_conf['color-template'] . " is empty", 66);
 					}
 				}
 
@@ -245,7 +243,7 @@ switch (@$argv[1]) {
 								$render = str_replace("\\033", "\033", $term_plist->toXML());
 							}
 							catch (Exception $ex) {
-								printerr("PLIST file is not a valid Terminal profile", 1);
+								printerr("PLIST file is not a valid Terminal profile", 66);
 							}
 						}
 						$builder->writeFile($file_path, $file_name, $render);
